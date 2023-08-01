@@ -1,17 +1,20 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:whatsapp_clone/common/utils/snackbar.dart';
 import 'package:whatsapp_clone/common/widgets/custom_button.dart';
 import 'package:whatsapp_clone/constants/colors.dart';
+import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   static const String routeName = '/login-screen';
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   TextEditingController phoneNumberController = TextEditingController();
   Country? _country;
 
@@ -23,6 +26,17 @@ class _LoginScreenState extends State<LoginScreen> {
             _country = country;
           });
         });
+  }
+
+  void sendPhoneNumber() {
+    String phoneNumber = phoneNumberController.text.trim();
+    if (_country != null && phoneNumber.isNotEmpty) {
+      ref.read(authControllerProvider).signInWithPhoneNumber(
+          context: context, phoneNumber: '+${_country!.phoneCode}$phoneNumber');
+      debugPrint(phoneNumber);
+    } else {
+      showSnackBar(context: context, content: 'Fill out all the fields!');
+    }
   }
 
   @override
@@ -102,7 +116,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
             const Spacer(),
-            CustomButton(text: 'Next', onPress: () {}),
+            CustomButton(
+              text: 'Next',
+              onPress: sendPhoneNumber,
+            ),
           ],
         ),
       ),
