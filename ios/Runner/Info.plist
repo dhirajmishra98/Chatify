@@ -29,6 +29,12 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>
+	<string>NSPhotoLibraryUsageDescription</string>
+	<key>Allow Whatsapp to access Gallery to pick image</key>
+	<string>NSCameraUsageDescription</string>
+	<key>Allow Whatsapp to use Camera</key>
+	<string>NSMicrophoneUsageDescription</string>
+	<key>Allow Whatsapp to use microphone</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
