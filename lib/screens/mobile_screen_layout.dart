@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:whatsapp_clone/constants/colors.dart';
+import 'package:whatsapp_clone/features/contacts/screens/select_contacts_screen.dart';
 import 'package:whatsapp_clone/widgets/archived.dart';
 import 'package:whatsapp_clone/widgets/contacts_list.dart';
 import 'package:whatsapp_clone/widgets/sliver_widget.dart';
@@ -102,9 +103,10 @@ class MobileScreenLayout extends StatelessWidget {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, SelectContactsScreen.routeName);
+          },
           backgroundColor: tabColor,
-          shape: const CircleBorder(),
           child: const Icon(
             Icons.comment,
             color: Colors.white,

@@ -35,6 +35,8 @@
 	<key>Allow Whatsapp to use Camera</key>
 	<string>NSMicrophoneUsageDescription</string>
 	<key>Allow Whatsapp to use microphone</key>
+	<key>NSContactsUsageDescription</key>
+    <string>access to contacts to chat</string>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

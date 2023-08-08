@@ -15,7 +15,10 @@ class MobContactsList extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const MobileChatScreen()));
+                          builder: (context) => const MobileChatScreen(
+                            name: 'dummy name',
+                            uid: 'dummy uid',
+                          )));
                     },
                     child: ListTile(
                       leading: CircleAvatar(
