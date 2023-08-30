@@ -87,7 +87,7 @@ class MobileScreenLayout extends StatelessWidget {
             children: [
               CustomTabView(
                 widgets: const [
-                  CustomSliver(childCount: 1, child: Text('Teamp'))
+                  CustomSliver(childCount: 1, child: Text('Team'))
                 ],
               ),
               CustomTabView(

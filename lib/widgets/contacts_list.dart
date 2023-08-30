@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/constants/info.dart';
-import 'package:whatsapp_clone/screens/mobile_chat_screen.dart';
+import 'package:whatsapp_clone/features/chat/screens/mobile_chat_screen.dart';
 
 class MobContactsList extends StatelessWidget {
   const MobContactsList({super.key});
