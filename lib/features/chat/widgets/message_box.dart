@@ -20,7 +20,7 @@ class MessageBox extends StatelessWidget {
           ),
         );
 
-      case MessageEnum.video: 
+      case MessageEnum.video:
         return VideoPlayer(
           videoUrl: message,
         );
@@ -29,7 +29,12 @@ class MessageBox extends StatelessWidget {
         return CachedNetworkImage(
           imageUrl: message,
         );
-        
+
+      case MessageEnum.gif:
+        return CachedNetworkImage(
+          imageUrl: message,
+        );
+
       default:
         return Container();
     }

@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
+import 'package:enough_giphy_flutter/enough_giphy_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_clone/common/enums/message_enums.dart';
@@ -59,6 +62,16 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     }
   }
 
+  void selectGif() async {
+    GiphyGif? gif = await pickGif(context);
+    if (gif != null) {
+      ref.read(chatControllerProvider).sendGif(
+          context: context,
+          gif: gif.url,
+          recieverUserId: widget.recieverUserId);
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -91,21 +104,14 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                 filled: true,
                 fillColor: mobileChatBoxColor,
                 prefixIcon: SizedBox(
-                  width: 100,
+                  width: 50,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: selectGif,
                         icon: const Icon(
                           Icons.emoji_emotions,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.gif,
                           color: Colors.grey,
                         ),
                       ),
@@ -118,6 +124,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       IconButton(
+                        padding: EdgeInsets.zero,
                         onPressed: selectImageFile,
                         icon: const Icon(
                           Icons.camera_alt,
@@ -125,6 +132,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                         ),
                       ),
                       IconButton(
+                        padding: EdgeInsets.zero,
                         onPressed: selectVideoFile,
                         icon: const Icon(
                           Icons.attach_file,
