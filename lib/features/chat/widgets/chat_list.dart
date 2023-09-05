@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:whatsapp_clone/common/widgets/loader.dart';
 import 'package:whatsapp_clone/features/chat/controllers/chat_controller.dart';
 import 'package:whatsapp_clone/models/message_model.dart';
-import 'package:whatsapp_clone/widgets/message_card.dart';
+import 'package:whatsapp_clone/features/chat/widgets/message_card.dart';
 
 class ChatList extends ConsumerStatefulWidget {
   final String recieverUserId;
@@ -46,12 +46,13 @@ class _ChatListState extends ConsumerState<ChatList> {
           itemBuilder: (context, index) {
             final messages = snapshot.data![index];
             return MessageCard(
-                message: messages.text,
-                date: DateFormat.Hm().format(messages.timeSent),
-                isMe:
-                    messages.senderId == FirebaseAuth.instance.currentUser!.uid
-                        ? "true"
-                        : "false");
+              message: messages.text,
+              date: DateFormat.Hm().format(messages.timeSent),
+              isMe: messages.senderId == FirebaseAuth.instance.currentUser!.uid
+                  ? "true"
+                  : "false",
+              messageEnum: messages.type,
+            );
           },
         );
       },

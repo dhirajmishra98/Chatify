@@ -1,10 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'package:whatsapp_clone/common/enums/message_enums.dart';
+import 'package:whatsapp_clone/common/repositories/common_firebase_storage_repository.dart';
 import 'package:whatsapp_clone/common/utils/utils.dart';
 import 'package:whatsapp_clone/models/chat_model.dart';
 import 'package:whatsapp_clone/models/message_model.dart';
@@ -184,4 +187,65 @@ class ChatRepository {
     }
   }
 
+  void sendFileMessage({
+    required BuildContext context,
+    required UserModel senderUser,
+    required String recieverUserId,
+    required File file,
+    required MessageEnum messageEnum,
+    required ProviderRef ref,
+  }) async {
+    try {
+      var timeSent = DateTime.now();
+      var messageId = const Uuid().v1();
+
+      String fileUrl = await ref
+          .read(commonFirebaseStorageRepositoryProvider)
+          .storeFileToFirebase(
+              ref:
+                  "chat/${messageEnum.type}/${senderUser.uid}/$recieverUserId/$messageId",
+              file: file);
+
+      var recieverUserDataMap =
+          await firebaseFirestore.collection('users').doc(recieverUserId).get();
+      UserModel recieverUser = UserModel.fromMap(recieverUserDataMap.data()!);
+
+      String displayMsg;
+      switch (messageEnum) {
+        case MessageEnum.image:
+          displayMsg = '📷 photo';
+          break;
+        case MessageEnum.audio:
+          displayMsg = '🎵 audio';
+          break;
+        case MessageEnum.video:
+          displayMsg = '📽 video';
+          break;
+        case MessageEnum.gif:
+          displayMsg = 'GIF';
+          break;
+        default:
+          displayMsg = 'Error';
+      }
+
+      _saveDataToContactSubcollection(
+          senderUserData: senderUser,
+          recieverUserData: recieverUser,
+          textSent: displayMsg,
+          timeSent: timeSent,
+          recieverUserId: recieverUserId);
+
+      _saveMessageToMessageSubcollection(
+          recieverUserId: recieverUserId,
+          text: fileUrl,
+          timeSent: timeSent,
+          messageId: messageId,
+          userName: senderUser.name,
+          recieverUserName: recieverUser.name,
+          messageType: messageEnum);
+
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+    }
+  }
 }

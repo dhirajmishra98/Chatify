@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:whatsapp_clone/common/enums/message_enums.dart';
+import 'package:whatsapp_clone/common/utils/utils.dart';
 import 'package:whatsapp_clone/features/chat/controllers/chat_controller.dart';
 
 import '../../../constants/colors.dart';
@@ -27,6 +31,31 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
       setState(() {
         _messageController.text = "";
       });
+    }
+  }
+
+  void sendFile({
+    required File file,
+    required MessageEnum messageEnum,
+  }) {
+    ref.read(chatControllerProvider).sendFileMessage(
+        context: context,
+        file: file,
+        recieverUserId: widget.recieverUserId,
+        messageEnum: messageEnum);
+  }
+
+  void selectImageFile() async {
+    File? image = await pickImageFromGallery(context);
+    if (image != null) {
+      sendFile(file: image, messageEnum: MessageEnum.image);
+    }
+  }
+
+  void selectVideoFile() async {
+    File? video = await pickVideoFromGallery(context);
+    if (video != null) {
+      sendFile(file: video, messageEnum: MessageEnum.video);
     }
   }
 
@@ -89,14 +118,14 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: selectImageFile,
                         icon: const Icon(
                           Icons.camera_alt,
                           color: Colors.grey,
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: selectVideoFile,
                         icon: const Icon(
                           Icons.attach_file,
                           color: Colors.grey,
