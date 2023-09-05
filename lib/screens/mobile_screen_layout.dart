@@ -1,13 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:whatsapp_clone/constants/colors.dart';
+import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 import 'package:whatsapp_clone/features/contacts/screens/select_contacts_screen.dart';
 import 'package:whatsapp_clone/widgets/archived.dart';
-import 'package:whatsapp_clone/widgets/contacts_list.dart';
+import 'package:whatsapp_clone/features/chat/widgets/contacts_list.dart';
 import 'package:whatsapp_clone/widgets/sliver_widget.dart';
 
-class MobileScreenLayout extends StatelessWidget {
+class MobileScreenLayout extends ConsumerStatefulWidget {
   const MobileScreenLayout({super.key});
+
+  @override
+  ConsumerState<MobileScreenLayout> createState() => _MobileScreenLayoutState();
+}
+
+class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        ref.read(authControllerProvider).updateUserState(true);
+        break;
+      case AppLifecycleState.detached:
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+        ref.read(authControllerProvider).updateUserState(false);
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +125,7 @@ class MobileScreenLayout extends StatelessWidget {
                   CustomSliver(childCount: 1, child: Text('Team'))
                 ],
               ),
-              CustomTabView(
+              CustomTabViews(
                 widgets: const [ArchivedBox(), MobContactsList()],
               ),
               CustomTabView(
@@ -133,10 +168,27 @@ class CustomTabView extends StatelessWidget {
         slivers: [
           SliverOverlapInjector(
               handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context)),
-          if (widgets.isNotEmpty) widgets[0],
           if (widgets.length >= 2) widgets[1],
+          if (widgets.isNotEmpty) widgets[0],
         ],
       );
+    });
+  }
+}
+
+// ignore: must_be_immutable
+class CustomTabViews extends StatelessWidget {
+  CustomTabViews({
+    required this.widgets,
+    super.key,
+  });
+
+  List<Widget> widgets;
+
+  @override
+  Widget build(BuildContext context) {
+    return Builder(builder: (context) {
+      return const MobContactsList();
     });
   }
 }

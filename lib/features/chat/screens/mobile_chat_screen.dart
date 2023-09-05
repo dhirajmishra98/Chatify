@@ -4,12 +4,12 @@ import 'package:remixicon/remixicon.dart';
 import 'package:whatsapp_clone/constants/colors.dart';
 import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 import 'package:whatsapp_clone/models/user_model.dart';
-import 'package:whatsapp_clone/widgets/chat_list.dart';
+import 'package:whatsapp_clone/features/chat/widgets/chat_list.dart';
 
 import '../widgets/bottom_chat_field.dart';
 
 class MobileChatScreen extends ConsumerWidget {
-  static const String routeName = 'mobile-chat-screen';
+  static const String routeName = '/mobile-chat-screen';
 
   final String name;
   final String uid;
@@ -58,15 +58,17 @@ class MobileChatScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: const Column(
+      body: Column(
         children: [
           Expanded(
-            child: ChatList(),
+            child: ChatList(uid),
           ),
           SizedBox(
             height: 60,
             width: double.infinity,
-            child: BottomChatField(),
+            child: BottomChatField(
+              recieverUserId: uid,
+            ),
           ),
         ],
       ),

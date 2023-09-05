@@ -24,6 +24,53 @@ class ChatRepository {
     required this.firebaseAuth,
   });
 
+  Stream<List<ChatContact>> getContactsList() {
+    return firebaseFirestore
+        .collection('users')
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection('chats')
+        .snapshots()
+        .asyncMap((event) async {
+      List<ChatContact> contacts = [];
+      for (var document in event.docs) {
+        var chatContact = ChatContact.fromMap(document.data());
+        var userData = await firebaseFirestore
+            .collection('users')
+            .doc(chatContact.contactId)
+            .get();
+
+        var user = UserModel.fromMap(userData.data()!);
+        contacts.add(ChatContact(
+            user.name,
+            user.profilePic,
+            chatContact.contactId,
+            chatContact.timeSent,
+            chatContact.lastMessage));
+      }
+
+      return contacts;
+    });
+  }
+
+  Stream<List<MessageModel>> getChatStream(String recieverUserId) {
+    return firebaseFirestore
+        .collection('users')
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection('chats')
+        .doc(recieverUserId)
+        .collection('messages')
+        .orderBy('timeSent')
+        .snapshots()
+        .map((event) {
+      List<MessageModel> messages = [];
+      for (var document in event.docs) {
+        messages.add(MessageModel.fromMap(document.data()));
+      }
+
+      return messages;
+    });
+  }
+
   void _saveDataToContactSubcollection(
       {required UserModel senderUserData,
       required UserModel recieverUserData,
@@ -136,4 +183,5 @@ class ChatRepository {
       showSnackBar(context: context, content: e.toString());
     }
   }
+
 }

@@ -1,19 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:whatsapp_clone/features/chat/controllers/chat_controller.dart';
 
 import '../../../constants/colors.dart';
 
-class BottomChatField extends StatefulWidget {
+class BottomChatField extends ConsumerStatefulWidget {
+  final String recieverUserId;
   const BottomChatField({
+    required this.recieverUserId,
     super.key,
   });
 
   @override
-  State<BottomChatField> createState() => _BottomChatFieldState();
+  ConsumerState<BottomChatField> createState() => _BottomChatFieldState();
 }
 
-class _BottomChatFieldState extends State<BottomChatField> {
+class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   bool showSendIcon = false;
-  TextEditingController messageController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
+
+  void sendTextMessage() {
+    if (showSendIcon & _messageController.text.isNotEmpty) {
+      ref.read(chatControllerProvider).sendTextMessage(
+          context, _messageController.text.trim(), widget.recieverUserId);
+
+      setState(() {
+        _messageController.text = "";
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _messageController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +44,7 @@ class _BottomChatFieldState extends State<BottomChatField> {
           child: Padding(
             padding: const EdgeInsets.only(top: 3.0, bottom: 3.0),
             child: TextFormField(
-              controller: messageController,
+              controller: _messageController,
               expands: true,
               maxLines: null,
               onChanged: (val) {
@@ -102,9 +123,10 @@ class _BottomChatFieldState extends State<BottomChatField> {
         ),
         FloatingActionButton(
           backgroundColor: tabColor,
-          onPressed: () {},
+          onPressed: sendTextMessage,
           shape: const CircleBorder(),
-          child: Icon(showSendIcon ? Icons.send : Icons.mic),
+          child:
+              Icon(_messageController.text.isNotEmpty ? Icons.send : Icons.mic),
         )
       ],
     );
