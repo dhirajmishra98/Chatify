@@ -1,13 +1,17 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/common/enums/message_enums.dart';
 import 'package:whatsapp_clone/features/chat/widgets/video_player.dart';
 
+// ignore: must_be_immutable
 class MessageBox extends StatelessWidget {
   final String message;
   final MessageEnum messageEnum;
-  const MessageBox(
-      {super.key, required this.message, required this.messageEnum});
+  MessageBox({super.key, required this.message, required this.messageEnum});
+
+  bool isPlaying = false;
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,26 @@ class MessageBox extends StatelessWidget {
           imageUrl: message,
         );
 
+      case MessageEnum.audio:
+        return StatefulBuilder(
+          builder: (context, setState) => IconButton(
+            constraints: const BoxConstraints(minWidth: 100),
+            onPressed: () async {
+              if (isPlaying) {
+                await _audioPlayer.pause();
+              } else {
+                await _audioPlayer.play(UrlSource(message));
+              }
+              setState(() {
+                isPlaying = !isPlaying;
+              });
+            },
+            icon: Icon(
+              isPlaying ? Icons.pause_circle : Icons.play_circle,
+              size: 30,
+            ),
+          ),
+        );
       default:
         return Container();
     }

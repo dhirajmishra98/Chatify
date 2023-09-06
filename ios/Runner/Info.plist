@@ -34,6 +34,8 @@
 	<string>NSCameraUsageDescription</string>
 	<key>Allow Whatsapp to use Camera</key>
 	<string>NSMicrophoneUsageDescription</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Needs to hear recordings</string>
 	<key>Allow Whatsapp to use microphone</key>
 	<key>NSContactsUsageDescription</key>
     <string>access to contacts to chat</string>
