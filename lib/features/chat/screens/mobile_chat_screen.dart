@@ -63,12 +63,8 @@ class MobileChatScreen extends ConsumerWidget {
           Expanded(
             child: ChatList(uid),
           ),
-          SizedBox(
-            height: 60,
-            width: double.infinity,
-            child: BottomChatField(
-              recieverUserId: uid,
-            ),
+          BottomChatField(
+            recieverUserId: uid,
           ),
         ],
       ),

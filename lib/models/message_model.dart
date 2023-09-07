@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
+
 import 'package:whatsapp_clone/common/enums/message_enums.dart';
 
 class MessageModel {
@@ -9,6 +11,9 @@ class MessageModel {
   final bool isSeen;
   final MessageEnum type;
   final String messageId;
+  final String repliedMessage;
+  final String repliedTo;
+  final MessageEnum repliedMessageType;
   MessageModel({
     required this.senderId,
     required this.recieverId,
@@ -17,6 +22,9 @@ class MessageModel {
     required this.isSeen,
     required this.type,
     required this.messageId,
+    required this.repliedMessage,
+    required this.repliedTo,
+    required this.repliedMessageType,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,6 +36,9 @@ class MessageModel {
       'isSeen': isSeen,
       'type': type.type,
       'messageId': messageId,
+      'repliedMessage': repliedMessage,
+      'repliedTo': repliedTo,
+      'repliedMessageType': repliedMessageType.type,
     };
   }
 
@@ -37,9 +48,12 @@ class MessageModel {
       recieverId: map['recieverId'] as String,
       text: map['text'] as String,
       timeSent: DateTime.fromMillisecondsSinceEpoch(map['timeSent'] as int),
-      isSeen: map['isSeen'],
+      isSeen: map['isSeen'] as bool,
       type: (map['type'] as String).toEnum(),
       messageId: map['messageId'] as String,
+      repliedMessage: map['repliedMessage'] as String,
+      repliedTo: map['repliedTo'] as String,
+      repliedMessageType: (map['repliedMessageType'] as String).toEnum(),
     );
   }
 

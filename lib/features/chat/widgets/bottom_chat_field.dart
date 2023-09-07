@@ -9,8 +9,10 @@ import 'package:flutter_sound/public/flutter_sound_recorder.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:whatsapp_clone/common/enums/message_enums.dart';
+import 'package:whatsapp_clone/common/providers/message_reply_provider.dart';
 import 'package:whatsapp_clone/common/utils/utils.dart';
 import 'package:whatsapp_clone/features/chat/controllers/chat_controller.dart';
+import 'package:whatsapp_clone/features/chat/widgets/message_reply_preview.dart';
 
 import '../../../constants/colors.dart';
 
@@ -122,94 +124,96 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    final messageReply = ref.watch(messageReplyProvider);
+    bool showMessageReply = messageReply != null;
+    return Column(
       children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 3.0, bottom: 3.0),
-            child: TextFormField(
-              controller: _messageController,
-              expands: true,
-              maxLines: null,
-              onChanged: (val) {
-                if (val.isNotEmpty) {
-                  setState(() {
-                    showSendIcon = true;
-                  });
-                } else {
-                  setState(() {
-                    showSendIcon = false;
-                  });
-                }
-              },
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: mobileChatBoxColor,
-                prefixIcon: SizedBox(
-                  width: 50,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      IconButton(
-                        onPressed: selectGif,
-                        icon: const Icon(
-                          Icons.emoji_emotions,
-                          color: Colors.grey,
+        if (showMessageReply) const MessageReplyPreview(),
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: _messageController,
+                onChanged: (val) {
+                  if (val.isNotEmpty) {
+                    setState(() {
+                      showSendIcon = true;
+                    });
+                  } else {
+                    setState(() {
+                      showSendIcon = false;
+                    });
+                  }
+                },
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: mobileChatBoxColor,
+                  prefixIcon: SizedBox(
+                    width: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButton(
+                          onPressed: selectGif,
+                          icon: const Icon(
+                            Icons.emoji_emotions,
+                            color: Colors.grey,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                suffixIcon: SizedBox(
-                  width: 100,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: selectImageFile,
-                        icon: const Icon(
-                          Icons.camera_alt,
-                          color: Colors.grey,
+                  suffixIcon: SizedBox(
+                    width: 100,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: selectImageFile,
+                          icon: const Icon(
+                            Icons.camera_alt,
+                            color: Colors.grey,
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: selectVideoFile,
-                        icon: const Icon(
-                          Icons.attach_file,
-                          color: Colors.grey,
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: selectVideoFile,
+                          icon: const Icon(
+                            Icons.attach_file,
+                            color: Colors.grey,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                hintText: 'Message',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                  borderSide: const BorderSide(
-                    width: 0,
-                    style: BorderStyle.none,
+                  hintText: 'Message',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: const BorderSide(
+                      width: 0,
+                      style: BorderStyle.none,
+                    ),
                   ),
+                  contentPadding: const EdgeInsets.all(5),
                 ),
-                contentPadding: const EdgeInsets.all(5),
               ),
             ),
-          ),
+            const SizedBox(
+              width: 5,
+            ),
+            FloatingActionButton(
+              backgroundColor: tabColor,
+              onPressed: sendTextMessage,
+              shape: const CircleBorder(),
+              child: Icon(_messageController.text.isNotEmpty
+                  ? Icons.send
+                  : isRecording
+                      ? Icons.mic_off
+                      : Icons.mic),
+            )
+          ],
         ),
-        const SizedBox(
-          width: 5,
-        ),
-        FloatingActionButton(
-          backgroundColor: tabColor,
-          onPressed: sendTextMessage,
-          shape: const CircleBorder(),
-          child: Icon(_messageController.text.isNotEmpty
-              ? Icons.send
-              : isRecording
-                  ? Icons.mic_off
-                  : Icons.mic),
-        )
       ],
     );
   }

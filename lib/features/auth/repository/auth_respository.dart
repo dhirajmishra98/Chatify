@@ -68,6 +68,7 @@ class AuthRepository {
       required String verificationId,
       required String userOTP}) async {
     try {
+      // debugPrint(userOTP);
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: userOTP);
       await auth.signInWithCredential(credential);
@@ -124,7 +125,7 @@ class AuthRepository {
         .map((event) => UserModel.fromMap(event.data()!));
   }
 
-   void updateUserState(bool isOnline) async {
+  void updateUserState(bool isOnline) async {
     await firebaseFirestore
         .collection('users')
         .doc(auth.currentUser!.uid)

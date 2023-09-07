@@ -34,7 +34,7 @@ class LandingScreen extends StatelessWidget {
               Image.asset(
                 'assets/images/landing_screen_bg.png',
                 color: tabColor,
-                height: 340,
+                height: 240,
                 width: 340,
               ),
               SizedBox(height: size.height / 8),

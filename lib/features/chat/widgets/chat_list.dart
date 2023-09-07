@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:whatsapp_clone/common/enums/message_enums.dart';
+import 'package:whatsapp_clone/common/providers/message_reply_provider.dart';
 import 'package:whatsapp_clone/common/widgets/loader.dart';
 import 'package:whatsapp_clone/features/chat/controllers/chat_controller.dart';
 import 'package:whatsapp_clone/models/message_model.dart';
@@ -18,6 +20,20 @@ class ChatList extends ConsumerStatefulWidget {
 
 class _ChatListState extends ConsumerState<ChatList> {
   final ScrollController _messageController = ScrollController();
+
+  void onMessageReply({
+    required String message,
+    required bool isMe,
+    required MessageEnum messageEnum,
+  }) {
+    ref.read(messageReplyProvider.notifier).update(
+          (state) => MessageReply(
+            message: message,
+            isMe: isMe,
+            messageEnum: messageEnum,
+          ),
+        );
+  }
 
   @override
   void dispose() {
@@ -52,6 +68,17 @@ class _ChatListState extends ConsumerState<ChatList> {
                   ? "true"
                   : "false",
               messageEnum: messages.type,
+              repliedMessageType: messages.repliedMessageType,
+              repliedText: messages.repliedMessage,
+              userName: messages.repliedTo,
+              onLeftSwipe: () => onMessageReply(
+                message: messages.text,
+                isMe:
+                    messages.senderId == FirebaseAuth.instance.currentUser!.uid
+                        ? true
+                        : false,
+                messageEnum: messages.type,
+              ),
             );
           },
         );
