@@ -14,6 +14,7 @@ class MessageCard extends StatelessWidget {
   final String repliedText;
   final String userName;
   final MessageEnum repliedMessageType;
+  final bool isSeen;
 
   const MessageCard({
     Key? key,
@@ -25,6 +26,7 @@ class MessageCard extends StatelessWidget {
     required this.repliedText,
     required this.userName,
     required this.repliedMessageType,
+    required this.isSeen,
   }) : super(key: key);
 
   @override
@@ -74,7 +76,8 @@ class MessageCard extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: backgroundColor.withOpacity(0.5),
-                            borderRadius: const BorderRadius.all(Radius.circular(5)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5)),
                           ),
                           child: MessageBox(
                             message: repliedText,
@@ -105,9 +108,13 @@ class MessageCard extends StatelessWidget {
                         width: 5,
                       ),
                       Icon(
-                        isMe == "true" ? Icons.done_all : null,
+                        isMe == "true"
+                            ? isSeen
+                                ? Icons.done_all
+                                : Icons.done
+                            : null,
                         size: 20,
-                        color: Colors.white60,
+                        color: isSeen ? Colors.blue : Colors.white60,
                       ),
                     ],
                   ),
