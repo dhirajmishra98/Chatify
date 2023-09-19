@@ -62,7 +62,7 @@ class _ChatListState extends ConsumerState<ChatList> {
           itemBuilder: (context, index) {
             final messages = snapshot.data![index];
 
-            if (messages.isSeen &&
+            if (!messages.isSeen &&
                 messages.recieverId == FirebaseAuth.instance.currentUser!.uid) {
               ref.read(chatControllerProvider).setChatMessageSeen(
                     context: context,
@@ -81,7 +81,7 @@ class _ChatListState extends ConsumerState<ChatList> {
               repliedMessageType: messages.repliedMessageType,
               repliedText: messages.repliedMessage,
               userName: messages.repliedTo,
-              onLeftSwipe: () => onMessageReply(
+              onSwipe: () => onMessageReply(
                 message: messages.text,
                 isMe:
                     messages.senderId == FirebaseAuth.instance.currentUser!.uid

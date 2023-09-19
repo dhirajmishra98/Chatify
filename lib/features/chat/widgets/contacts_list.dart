@@ -5,6 +5,7 @@ import 'package:whatsapp_clone/common/widgets/loader.dart';
 import 'package:whatsapp_clone/features/chat/controllers/chat_controller.dart';
 import 'package:whatsapp_clone/features/chat/screens/mobile_chat_screen.dart';
 import 'package:whatsapp_clone/models/chat_model.dart';
+import 'package:whatsapp_clone/widgets/archived.dart';
 
 class MobContactsList extends ConsumerWidget {
   const MobContactsList({super.key});
@@ -22,15 +23,13 @@ class MobContactsList extends ConsumerWidget {
             SliverOverlapInjector(
                 handle:
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context)),
-            // if (widgets.length >= 2) widgets[1],
-            // if (widgets.isNotEmpty) widgets[0],
-
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   var chatContactData = snapshot.data![index];
                   return Column(
                     children: [
+                      const ArchivedBox(),
                       InkWell(
                         onTap: () {
                           Navigator.pushNamed(
@@ -40,11 +39,17 @@ class MobContactsList extends ConsumerWidget {
                           });
                         },
                         child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage:
-                                AssetImage(chatContactData.profilePic),
-                            radius: 30,
-                          ),
+                          leading: chatContactData.profilePic != ""
+                              ? CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage(chatContactData.profilePic),
+                                  radius: 30,
+                                )
+                              : const CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage('assets/images/bot.png'),
+                                  radius: 30,
+                                ),
                           title: Text(
                             chatContactData.name,
                             style: const TextStyle(

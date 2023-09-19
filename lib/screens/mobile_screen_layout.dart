@@ -1,12 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
+import 'package:whatsapp_clone/common/utils/utils.dart';
 import 'package:whatsapp_clone/constants/colors.dart';
 import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 import 'package:whatsapp_clone/features/contacts/screens/select_contacts_screen.dart';
-import 'package:whatsapp_clone/widgets/archived.dart';
+import 'package:whatsapp_clone/features/status/screens/confirm_status_screen.dart';
+import 'package:whatsapp_clone/features/status/screens/status_contacts_screen.dart';
 import 'package:whatsapp_clone/features/chat/widgets/contacts_list.dart';
-import 'package:whatsapp_clone/widgets/sliver_widget.dart';
 
 class MobileScreenLayout extends ConsumerStatefulWidget {
   const MobileScreenLayout({super.key});
@@ -16,17 +21,34 @@ class MobileScreenLayout extends ConsumerStatefulWidget {
 }
 
 class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
-    with WidgetsBindingObserver {
+    with WidgetsBindingObserver, TickerProviderStateMixin {
+  late TabController tabBarController;
+  int currentIndex = 1;
+
   @override
   void initState() {
     super.initState();
+
+    tabBarController = TabController(
+      length: 4,
+      vsync: this,
+      initialIndex: 1,
+    );
     WidgetsBinding.instance.addObserver(this);
+    tabBarController.addListener(_handleTabSelection);
+  }
+
+  void _handleTabSelection() {
+    setState(() {
+      currentIndex = tabBarController.index;
+    });
   }
 
   @override
   void dispose() {
     super.dispose();
     WidgetsBinding.instance.removeObserver(this);
+    tabBarController.dispose();
   }
 
   @override
@@ -48,7 +70,6 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
-      initialIndex: 1,
       child: Scaffold(
         body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -93,13 +114,14 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
                       ),
                     ),
                   ],
-                  bottom: const TabBar(
+                  bottom: TabBar(
+                    controller: tabBarController,
                     indicatorColor: tabColor,
                     indicatorSize: TabBarIndicatorSize.tab,
                     labelColor: tabColor,
                     unselectedLabelColor: Colors.grey,
-                    labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                    tabs: [
+                    labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                    tabs: const [
                       Tab(
                         icon: Icon(Remix.team_fill),
                       ),
@@ -119,76 +141,54 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
             ];
           },
           body: TabBarView(
+            controller: tabBarController,
             children: [
-              CustomTabView(
-                widgets: const [
-                  CustomSliver(childCount: 1, child: Text('Team'))
-                ],
-              ),
-              CustomTabViews(
-                widgets: const [ArchivedBox(), MobContactsList()],
-              ),
-              CustomTabView(
-                widgets: const [],
-              ),
-              CustomTabView(
-                widgets: const [],
-              ),
+              Builder(builder: (context) {
+                return const Center(
+                  child: Text('Implement Teams'),
+                );
+              }),
+              Builder(builder: (context) {
+                return const MobContactsList();
+              }),
+              Builder(builder: (context) {
+                return const StatusContactsScreen();
+              }),
+              Builder(builder: (context) {
+                return const Center(
+                  child: Text("To Be Implemented"),
+                );
+              })
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, SelectContactsScreen.routeName);
+          onPressed: () async {
+            if (currentIndex == 1) {
+              Navigator.pushNamed(context, SelectContactsScreen.routeName);
+            } else if (currentIndex == 2) {
+              File? pickedImage = await pickImageFromGallery(context);
+              if (pickedImage != null) {
+                Navigator.pushNamed(context, ConfirmStatusScreen.routeName,
+                    arguments: pickedImage);
+              }
+            } else {
+              debugPrint("To Be Implemented");
+            }
           },
           backgroundColor: tabColor,
-          child: const Icon(
-            Icons.comment,
+          child: Icon(
+            currentIndex == 0
+                ? Icons.person_sharp
+                : currentIndex == 1
+                    ? Icons.comment
+                    : currentIndex == 2
+                        ? Icons.add
+                        : Icons.phone,
             color: Colors.white,
           ),
         ),
       ),
     );
-  }
-}
-
-// ignore: must_be_immutable
-class CustomTabView extends StatelessWidget {
-  CustomTabView({
-    required this.widgets,
-    super.key,
-  });
-
-  List<Widget> widgets;
-
-  @override
-  Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return CustomScrollView(
-        slivers: [
-          SliverOverlapInjector(
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context)),
-          if (widgets.length >= 2) widgets[1],
-          if (widgets.isNotEmpty) widgets[0],
-        ],
-      );
-    });
-  }
-}
-
-// ignore: must_be_immutable
-class CustomTabViews extends StatelessWidget {
-  CustomTabViews({
-    required this.widgets,
-    super.key,
-  });
-
-  List<Widget> widgets;
-
-  @override
-  Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return const MobContactsList();
-    });
   }
 }

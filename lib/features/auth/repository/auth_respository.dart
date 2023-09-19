@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_clone/common/repositories/common_firebase_storage_repository.dart';
 
 import 'package:whatsapp_clone/common/utils/utils.dart';
-import 'package:whatsapp_clone/constants/urls.dart';
 import 'package:whatsapp_clone/features/auth/screens/otp_screen.dart';
 import 'package:whatsapp_clone/features/auth/screens/user_information_screen.dart';
 import 'package:whatsapp_clone/models/user_model.dart';
@@ -87,7 +86,7 @@ class AuthRepository {
   }) async {
     try {
       String uid = auth.currentUser!.uid;
-      String photoUrl = profileUrl;
+      String photoUrl = "";
 
       if (profilePic != null) {
         photoUrl = await ref

@@ -321,7 +321,7 @@ class ChatRepository {
           .doc(recieverId)
           .collection('messages')
           .doc(messageId)
-          .set({'isSeen': true});
+          .update({'isSeen': true});
 
       await firebaseFirestore
           .collection('users')
@@ -330,7 +330,7 @@ class ChatRepository {
           .doc(firebaseAuth.currentUser!.uid)
           .collection('messages')
           .doc(messageId)
-          .set({'isSeen': true});
+          .update({'isSeen': true});
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }

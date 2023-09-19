@@ -5,12 +5,12 @@ import 'package:whatsapp_clone/features/chat/widgets/message_box.dart';
 
 import '../../../constants/colors.dart';
 
-class MessageCard extends StatelessWidget {
+class MessageCard extends StatefulWidget {
   final String isMe;
   final String message;
   final String date;
   final MessageEnum messageEnum;
-  final VoidCallback onLeftSwipe;
+  final VoidCallback onSwipe;
   final String repliedText;
   final String userName;
   final MessageEnum repliedMessageType;
@@ -22,7 +22,7 @@ class MessageCard extends StatelessWidget {
     required this.date,
     required this.isMe,
     required this.messageEnum,
-    required this.onLeftSwipe,
+    required this.onSwipe,
     required this.repliedText,
     required this.userName,
     required this.repliedMessageType,
@@ -30,13 +30,20 @@ class MessageCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<MessageCard> createState() => _MessageCardState();
+}
+
+class _MessageCardState extends State<MessageCard> {
+  @override
   Widget build(BuildContext context) {
-    final isReplying = repliedText.isNotEmpty;
+    final isReplying = widget.repliedText.isNotEmpty;
     return SwipeTo(
-      onLeftSwipe: onLeftSwipe,
+      onLeftSwipe: widget.isMe == "true" ? widget.onSwipe : null,
+      onRightSwipe: widget.isMe == "false" ? widget.onSwipe : null,
       child: Align(
-        alignment:
-            isMe == "true" ? Alignment.centerRight : Alignment.centerLeft,
+        alignment: widget.isMe == "true"
+            ? Alignment.centerRight
+            : Alignment.centerLeft,
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width - 45,
@@ -46,12 +53,12 @@ class MessageCard extends StatelessWidget {
             elevation: 1,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            color: isMe == 'true' ? messageColor : senderMessageColor,
+            color: widget.isMe == 'true' ? messageColor : senderMessageColor,
             margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
             child: Stack(
               children: [
                 Padding(
-                  padding: messageEnum == MessageEnum.text
+                  padding: widget.messageEnum == MessageEnum.text
                       ? const EdgeInsets.only(
                           left: 10,
                           right: 30,
@@ -68,7 +75,7 @@ class MessageCard extends StatelessWidget {
                     children: [
                       if (isReplying) ...[
                         Text(
-                          userName,
+                          widget.userName,
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 3),
@@ -80,25 +87,25 @@ class MessageCard extends StatelessWidget {
                                 const BorderRadius.all(Radius.circular(5)),
                           ),
                           child: MessageBox(
-                            message: repliedText,
-                            messageEnum: repliedMessageType,
+                            message: widget.repliedText,
+                            messageEnum: widget.repliedMessageType,
                           ),
                         ),
                       ],
                       MessageBox(
-                        message: message,
-                        messageEnum: messageEnum,
+                        message: widget.message,
+                        messageEnum: widget.messageEnum,
                       ),
                     ],
                   ),
                 ),
                 Positioned(
-                  bottom: isMe == 'true' ? 4 : 2,
+                  bottom: widget.isMe == 'true' ? 4 : 2,
                   right: 10,
                   child: Row(
                     children: [
                       Text(
-                        date,
+                        widget.date,
                         style: const TextStyle(
                           fontSize: 13,
                           color: Colors.white60,
@@ -108,13 +115,13 @@ class MessageCard extends StatelessWidget {
                         width: 5,
                       ),
                       Icon(
-                        isMe == "true"
-                            ? isSeen
+                        widget.isMe == "true"
+                            ? widget.isSeen
                                 ? Icons.done_all
                                 : Icons.done
                             : null,
                         size: 20,
-                        color: isSeen ? Colors.blue : Colors.white60,
+                        color: widget.isSeen ? Colors.blue : Colors.white60,
                       ),
                     ],
                   ),
