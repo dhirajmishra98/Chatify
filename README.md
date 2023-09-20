@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-## Some Screens
+## Some Screens - ANDRIOD
 <p float="left">
   
   <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/cddf1191-136d-47a8-914e-adb9f4015e63" width="200" /> 
@@ -22,6 +22,13 @@ A new Flutter project.
   <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/2817c27f-acf7-49c1-b86d-43c64f561d76" width="200" /> 
   <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/4a8e77e8-cb00-4693-b013-7fd09ff62271" width="200" />
 </p>
+
+<br>
+<br>
+
+## Screen With Dummy Data - WEB
+![image](https://github.com/dhirajmishra98/Chatify/assets/95682044/2861176e-1b24-4168-afc2-c4bbc7035ad1)
+
 
 This project is a starting point for a Flutter application.
 
