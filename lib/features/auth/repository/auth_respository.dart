@@ -11,7 +11,7 @@ import 'package:whatsapp_clone/common/utils/utils.dart';
 import 'package:whatsapp_clone/features/auth/screens/otp_screen.dart';
 import 'package:whatsapp_clone/features/auth/screens/user_information_screen.dart';
 import 'package:whatsapp_clone/models/user_model.dart';
-import 'package:whatsapp_clone/screens/mobile_screen_layout.dart';
+import 'package:whatsapp_clone/platform_roots/android/screens/mobile_screen_layout.dart';
 
 final authRepositoryProvider = Provider(
   (ref) => AuthRepository(

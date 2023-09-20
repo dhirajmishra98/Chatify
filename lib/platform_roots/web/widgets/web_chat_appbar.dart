@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remixicon/remixicon.dart';
 
-import '../../constants/colors.dart';
+import '../../../constants/colors.dart';
 
 class WebChatAppBar extends StatelessWidget {
   const WebChatAppBar({super.key});
@@ -20,14 +20,14 @@ class WebChatAppBar extends StatelessWidget {
                   "https://upload.wikimedia.org/wikipedia/commons/8/85/Elon_Musk_Royal_Society_%28crop1%29.jpg"),
             ),
             title: Text(
-              'Dhiraj',
+              'Reciever\'s name',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
             ),
             subtitle: Text(
-              "suraj, dhiraj, chandan",
+              "online",
               style: TextStyle(
                 fontSize: 15,
                 color: Colors.grey,

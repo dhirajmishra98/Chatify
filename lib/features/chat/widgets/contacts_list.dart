@@ -5,7 +5,7 @@ import 'package:whatsapp_clone/common/widgets/loader.dart';
 import 'package:whatsapp_clone/features/chat/controllers/chat_controller.dart';
 import 'package:whatsapp_clone/features/chat/screens/mobile_chat_screen.dart';
 import 'package:whatsapp_clone/models/chat_model.dart';
-import 'package:whatsapp_clone/widgets/archived.dart';
+import 'package:whatsapp_clone/platform_roots/android/widgets/archived.dart';
 
 class MobContactsList extends ConsumerWidget {
   const MobContactsList({super.key});

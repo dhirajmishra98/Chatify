@@ -1,17 +1,10 @@
 const info = [
   {
-    'name': 'Rivaan Ranawat',
+    'name': 'Dummy Data',
     'message': 'Hey, how are you doing?',
     'time': '3:53 pm',
     'profilePic':
         'https://upload.wikimedia.org/wikipedia/commons/8/85/Elon_Musk_Royal_Society_%28crop1%29.jpg',
-  },
-  {
-    'name': 'Naman Ranawat',
-    'message': 'Hello, I want to sleep.',
-    'time': '1:03 pm',
-    'profilePic':
-        'https://media.cntraveler.com/photos/60596b398f4452dac88c59f8/16:9/w_3999,h_2249,c_limit/MtFuji-GettyImages-959111140.jpg',
   },
   {
     'name': 'Dad',
@@ -63,7 +56,7 @@ const info = [
         'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
   },
   {
-    'name': 'Naman Ranawat',
+    'name': 'Manash',
     'message': 'Hello, I want to sleep.',
     'time': '1:03 pm',
     'profilePic':
@@ -132,17 +125,17 @@ const messages = [
   {"isMe": true, "text": "Obviously, say", "time": "11:03 am"},
   {
     "isMe": false,
-    "text": "haha I wanted you to check out my new channel ^^",
+    "text": "haha I wanted you to stay healthy ^^",
     "time": "11:04 am"
   },
   {
     "isMe": true,
-    "text": " Sure, what is the channel name?",
+    "text": " Sure",
     "time": "11:05 am"
   },
   {
     "isMe": false,
-    "text": "Rivaan Ranawat",
+    "text": "dhiraj mishra",
     "time": "11:06 am",
   },
   {
@@ -151,7 +144,7 @@ const messages = [
     "time": "11:15 am",
   },
   {"isMe": false, "text": "Thanks bro!", "time": "11:17 am"},
-  {"isMe": false, "text": "Did you subscribe?", "time": "11:16 am"},
+  {"isMe": false, "text": "Are you fine bro?", "time": "11:16 am"},
   {"isMe": true, "text": "Yes, surely bro!", "time": "11:17 am"},
   {
     "isMe": false,

@@ -6,9 +6,9 @@ import 'package:whatsapp_clone/common/widgets/loader.dart';
 import 'package:whatsapp_clone/constants/colors.dart';
 import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 import 'package:whatsapp_clone/router.dart';
-import 'package:whatsapp_clone/screens/landing_screen.dart';
+import 'package:whatsapp_clone/platform_roots/android/screens/landing_screen.dart';
 import 'package:whatsapp_clone/firebase_options.dart';
-import 'package:whatsapp_clone/screens/mobile_screen_layout.dart';
+import 'package:whatsapp_clone/platform_roots/android/screens/mobile_screen_layout.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

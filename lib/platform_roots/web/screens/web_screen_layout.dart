@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/features/chat/widgets/chat_list.dart';
-import 'package:whatsapp_clone/widgets/web/web_archived.dart';
-import 'package:whatsapp_clone/widgets/web/web_contacts_list.dart';
-import 'package:whatsapp_clone/widgets/web/web_profile_appbar.dart';
-import 'package:whatsapp_clone/widgets/web/web_search_bar.dart';
+import 'package:whatsapp_clone/platform_roots/web/widgets/web_archived.dart';
+import 'package:whatsapp_clone/platform_roots/web/widgets/web_contacts_list.dart';
+import 'package:whatsapp_clone/platform_roots/web/widgets/web_profile_appbar.dart';
+import 'package:whatsapp_clone/platform_roots/web/widgets/web_search_bar.dart';
 
-import '../constants/colors.dart';
-import '../widgets/web/web_chat_appbar.dart';
+import '../../../constants/colors.dart';
+import '../widgets/web_chat_appbar.dart';
+import '../widgets/web_chat_list.dart';
 
 class WebScreenLayout extends StatelessWidget {
   const WebScreenLayout({super.key});
@@ -46,7 +46,7 @@ class WebScreenLayout extends StatelessWidget {
             child: const Column(
               children: [
                 WebChatAppBar(),
-                Expanded(child: ChatList("")),
+                Expanded(child: WebChatList()),
                 TypeBox(),
               ],
             ),
