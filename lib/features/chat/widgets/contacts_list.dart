@@ -37,6 +37,7 @@ class MobContactsList extends ConsumerWidget {
                             'name': chatContactData.name,
                             'uid': chatContactData.contactId,
                             'isGroupChat': false,
+                            'recieverProfilePic': chatContactData.profilePic,
                           });
                         },
                         child: ListTile(

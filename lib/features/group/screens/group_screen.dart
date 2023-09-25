@@ -34,6 +34,7 @@ class MobGroupsList extends ConsumerWidget {
                             'name': groupData.name,
                             'uid': groupData.groupId,
                             'isGroupChat': true,
+                            'recieverProfilePic': groupData.groupProfilePic,
                           });
                     },
                     child: ListTile(
