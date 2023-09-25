@@ -8,6 +8,7 @@ import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 
 import 'package:whatsapp_clone/features/chat/repository/chat_repository.dart';
 import 'package:whatsapp_clone/models/chat_model.dart';
+import 'package:whatsapp_clone/models/group_model.dart';
 import 'package:whatsapp_clone/models/message_model.dart';
 
 import '../../../common/enums/message_enums.dart';
@@ -29,12 +30,24 @@ class ChatController {
     return chatRepository.getContactsList();
   }
 
+  Stream<List<GroupModel>> chatGroups() {
+    return chatRepository.getChatGroups();
+  }
+
   Stream<List<MessageModel>> chatMessages(String recieverUserId) {
     return chatRepository.getChatStream(recieverUserId);
   }
 
+  Stream<List<MessageModel>> groupChatMessages(String recieverUserId) {
+    return chatRepository.getGroupChatStream(recieverUserId);
+  }
+
   void sendTextMessage(
-      BuildContext context, String text, String recieverUserId) {
+    BuildContext context,
+    String text,
+    String recieverUserId,
+    bool isGroupChat,
+  ) {
     final messageReply = ref.read(messageReplyProvider);
     ref.read(userDataAuthProvider).whenData(
           (value) => chatRepository.sendTextMessage(
@@ -43,6 +56,7 @@ class ChatController {
             recieverUserId: recieverUserId,
             senderUser: value!,
             messageReply: messageReply,
+            isGroupChat: isGroupChat,
           ),
         );
 
@@ -54,6 +68,7 @@ class ChatController {
     required File file,
     required String recieverUserId,
     required MessageEnum messageEnum,
+    required bool isGroupChat,
   }) {
     final messageReply = ref.read(messageReplyProvider);
     ref
@@ -66,6 +81,7 @@ class ChatController {
               messageEnum: messageEnum,
               ref: ref,
               messageReply: messageReply,
+              isGroupChat: isGroupChat,
             ));
     ref.read(messageReplyProvider.notifier).update((state) => null);
   }
@@ -74,6 +90,7 @@ class ChatController {
     required BuildContext context,
     required String gif,
     required String recieverUserId,
+    required bool isGroupChat,
   }) {
     int gifUrlUniqueIndex = gif.lastIndexOf('-') + 1;
     String uniqueGifUrl = gif.substring(gifUrlUniqueIndex);
@@ -87,6 +104,7 @@ class ChatController {
           recieverUserId: recieverUserId,
           senderUser: value!,
           messageReply: messageReply,
+          isGroupChat: isGroupChat
         ));
     ref.read(messageReplyProvider.notifier).update((state) => null);
   }

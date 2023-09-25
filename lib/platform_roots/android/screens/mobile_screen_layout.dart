@@ -9,9 +9,12 @@ import 'package:whatsapp_clone/common/utils/utils.dart';
 import 'package:whatsapp_clone/constants/colors.dart';
 import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 import 'package:whatsapp_clone/features/contacts/screens/select_contacts_screen.dart';
+import 'package:whatsapp_clone/features/group/screens/create_group_screen.dart';
 import 'package:whatsapp_clone/features/status/screens/confirm_status_screen.dart';
 import 'package:whatsapp_clone/features/status/screens/status_contacts_screen.dart';
 import 'package:whatsapp_clone/features/chat/widgets/contacts_list.dart';
+
+import '../../../features/group/screens/group_screen.dart';
 
 class MobileScreenLayout extends ConsumerStatefulWidget {
   const MobileScreenLayout({super.key});
@@ -106,13 +109,30 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
                         color: Colors.grey,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
+                    // IconButton(
+                    //   onPressed: () {},
+                    //   icon: const Icon(
+                    //     Icons.more_vert_rounded,
+                    //     color: Colors.grey,
+                    //   ),
+                    // ),
+                    PopupMenuButton(
                       icon: const Icon(
                         Icons.more_vert_rounded,
                         color: Colors.grey,
                       ),
-                    ),
+                      itemBuilder: (context) => <PopupMenuItem<String>>[
+                        PopupMenuItem(
+                          child: const Text(
+                            "Create Group",
+                          ),
+                          onTap: () => Future(
+                            () => Navigator.pushNamed(
+                                context, CreateGroupScreen.routeName),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                   bottom: TabBar(
                     controller: tabBarController,
@@ -144,9 +164,7 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
             controller: tabBarController,
             children: [
               Builder(builder: (context) {
-                return const Center(
-                  child: Text('Implement Teams'),
-                );
+                return const MobGroupsList();
               }),
               Builder(builder: (context) {
                 return const MobContactsList();

@@ -12,7 +12,8 @@ import 'package:whatsapp_clone/features/chat/widgets/message_card.dart';
 
 class ChatList extends ConsumerStatefulWidget {
   final String recieverUserId;
-  const ChatList(this.recieverUserId, {super.key});
+  final bool isGroupChat;
+  const ChatList(this.recieverUserId, this.isGroupChat, {super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ChatListState();
@@ -44,7 +45,7 @@ class _ChatListState extends ConsumerState<ChatList> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<MessageModel>>(
-      stream:
+      stream: widget.isGroupChat ? ref.read(chatControllerProvider).groupChatMessages(widget.recieverUserId):
           ref.read(chatControllerProvider).chatMessages(widget.recieverUserId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {

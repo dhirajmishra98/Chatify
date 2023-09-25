@@ -18,7 +18,9 @@ import '../../../constants/colors.dart';
 
 class BottomChatField extends ConsumerStatefulWidget {
   final String recieverUserId;
+  final bool isGroupChat;
   const BottomChatField({
+    required this.isGroupChat,
     required this.recieverUserId,
     super.key,
   });
@@ -54,7 +56,11 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   void sendTextMessage() async {
     if (showSendIcon & _messageController.text.isNotEmpty) {
       ref.read(chatControllerProvider).sendTextMessage(
-          context, _messageController.text.trim(), widget.recieverUserId);
+            context,
+            _messageController.text.trim(),
+            widget.recieverUserId,
+            widget.isGroupChat,
+          );
 
       setState(() {
         _messageController.text = "";
@@ -87,7 +93,8 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
         context: context,
         file: file,
         recieverUserId: widget.recieverUserId,
-        messageEnum: messageEnum);
+        messageEnum: messageEnum,
+        isGroupChat: widget.isGroupChat);
   }
 
   void selectImageFile() async {
@@ -108,9 +115,11 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     GiphyGif? gif = await pickGif(context);
     if (gif != null) {
       ref.read(chatControllerProvider).sendGif(
-          context: context,
-          gif: gif.url,
-          recieverUserId: widget.recieverUserId);
+            context: context,
+            gif: gif.url,
+            recieverUserId: widget.recieverUserId,
+            isGroupChat: widget.isGroupChat,
+          );
     }
   }
 

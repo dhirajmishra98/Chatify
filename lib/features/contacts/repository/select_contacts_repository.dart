@@ -22,16 +22,22 @@ class SelectContactsRepository {
   Future<List<Contact>> getContactsList() async {
     List<Contact> contacts = [];
     try {
+      List<Contact> rawContacts = [];
       if (await FlutterContacts.requestPermission()) {
-        contacts = await FlutterContacts.getContacts(
+        rawContacts = await FlutterContacts.getContacts(
           withProperties: true,
           withPhoto: true,
         );
       }
+
+      for (var contact in rawContacts) {
+        if (contact.phones.isNotEmpty) {
+          contacts.add(contact);
+        }
+      }
     } catch (e) {
       debugPrint(e.toString());
     }
-
     return contacts;
   }
 

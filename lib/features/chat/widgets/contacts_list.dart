@@ -29,13 +29,14 @@ class MobContactsList extends ConsumerWidget {
                   var chatContactData = snapshot.data![index];
                   return Column(
                     children: [
-                      const ArchivedBox(),
+                      index == 0 ? const ArchivedBox() : Container(),
                       InkWell(
                         onTap: () {
                           Navigator.pushNamed(
                               context, MobileChatScreen.routeName, arguments: {
                             'name': chatContactData.name,
-                            'uid': chatContactData.contactId
+                            'uid': chatContactData.contactId,
+                            'isGroupChat': false,
                           });
                         },
                         child: ListTile(
