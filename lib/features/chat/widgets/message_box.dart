@@ -1,8 +1,9 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chatify/features/chat/widgets/video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/common/enums/message_enums.dart';
-import 'package:whatsapp_clone/features/chat/widgets/video_player.dart';
+
+import '../../../common/enums/message_enums.dart';
 
 // ignore: must_be_immutable
 class MessageBox extends StatelessWidget {

@@ -5,16 +5,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
-import 'package:whatsapp_clone/common/utils/utils.dart';
-import 'package:whatsapp_clone/constants/colors.dart';
-import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
-import 'package:whatsapp_clone/features/contacts/screens/select_contacts_screen.dart';
-import 'package:whatsapp_clone/features/group/screens/create_group_screen.dart';
-import 'package:whatsapp_clone/features/status/screens/confirm_status_screen.dart';
-import 'package:whatsapp_clone/features/status/screens/status_contacts_screen.dart';
-import 'package:whatsapp_clone/features/chat/widgets/contacts_list.dart';
 
+import '../../../common/utils/utils.dart';
+import '../../../constants/colors.dart';
+import '../../../constants/urls.dart';
+import '../../../features/auth/controller/auth_controller.dart';
+import '../../../features/chat/widgets/contacts_list.dart';
+import '../../../features/contacts/screens/select_contacts_screen.dart';
 import '../../../features/group/screens/group_screen.dart';
+import '../../../features/status/screens/confirm_status_screen.dart';
+import '../../../features/status/screens/status_contacts_screen.dart';
 
 class MobileScreenLayout extends ConsumerStatefulWidget {
   const MobileScreenLayout({super.key});
@@ -26,16 +26,16 @@ class MobileScreenLayout extends ConsumerStatefulWidget {
 class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
     with WidgetsBindingObserver, TickerProviderStateMixin {
   late TabController tabBarController;
-  int currentIndex = 1;
+  int currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
 
     tabBarController = TabController(
-      length: 4,
+      length: 2,
       vsync: this,
-      initialIndex: 1,
+      initialIndex: 0,
     );
     WidgetsBinding.instance.addObserver(this);
     tabBarController.addListener(_handleTabSelection);
@@ -72,7 +72,7 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 2,
       child: Scaffold(
         body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -81,58 +81,51 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
                 handle:
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: SliverAppBar(
+                  toolbarHeight: 100,
                   pinned: true,
                   centerTitle: false,
                   floating: true,
                   snap: true,
-                  backgroundColor: appBarColor,
-                  title: const Text(
-                    'WhatsApp',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Colors.grey,
-                      fontSize: 25,
+                  title: const ListTile(
+                    title: Text(
+                      'Chatify',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 35,
+                      ),
                     ),
+                    subtitle: Text('Chirp, don\'t be shy'),
                   ),
                   actions: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          Navigator.pushNamed(context, GroupScreen.routeName),
                       icon: const Icon(
-                        Icons.camera_alt_outlined,
-                        color: Colors.grey,
+                        Remix.group_2_fill,
+                        color: tabColor,
+                        size: 30,
                       ),
                     ),
                     IconButton(
                       onPressed: () {},
                       icon: const Icon(
                         Icons.search,
-                        color: Colors.grey,
+                        color: tabColor,
+                        size: 30,
                       ),
                     ),
-                    // IconButton(
-                    //   onPressed: () {},
-                    //   icon: const Icon(
-                    //     Icons.more_vert_rounded,
-                    //     color: Colors.grey,
-                    //   ),
-                    // ),
-                    PopupMenuButton(
-                      icon: const Icon(
-                        Icons.more_vert_rounded,
-                        color: Colors.grey,
-                      ),
-                      itemBuilder: (context) => <PopupMenuItem<String>>[
-                        PopupMenuItem(
-                          child: const Text(
-                            "Create Group",
-                          ),
-                          onTap: () => Future(
-                            () => Navigator.pushNamed(
-                                context, CreateGroupScreen.routeName),
-                          ),
-                        ),
-                      ],
-                    )
+                    IconButton(
+                        onPressed: () {},
+                        icon: userProfilePhoto == null
+                            ? const CircleAvatar(
+                                backgroundImage:
+                                    AssetImage('assets/images/bot.png'),
+                                radius: 30,
+                              )
+                            : CircleAvatar(
+                                backgroundImage: FileImage(userProfilePhoto!),
+                                radius: 30,
+                              )),
                   ],
                   bottom: TabBar(
                     controller: tabBarController,
@@ -143,16 +136,10 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
                     labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                     tabs: const [
                       Tab(
-                        icon: Icon(Remix.team_fill),
-                      ),
-                      Tab(
                         text: "Chats",
                       ),
                       Tab(
                         text: 'Status',
-                      ),
-                      Tab(
-                        text: 'Calls',
                       ),
                     ],
                   ),
@@ -164,27 +151,24 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
             controller: tabBarController,
             children: [
               Builder(builder: (context) {
-                return const MobGroupsList();
-              }),
-              Builder(builder: (context) {
                 return const MobContactsList();
               }),
               Builder(builder: (context) {
                 return const StatusContactsScreen();
               }),
-              Builder(builder: (context) {
-                return const Center(
-                  child: Text("To Be Implemented"),
-                );
-              })
+              // Builder(builder: (context) {
+              //   return const Center(
+              //     child: Text("To Be Implemented"),
+              //   );
+              // })
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            if (currentIndex == 1) {
+            if (currentIndex == 0) {
               Navigator.pushNamed(context, SelectContactsScreen.routeName);
-            } else if (currentIndex == 2) {
+            } else if (currentIndex == 1) {
               File? pickedImage = await pickImageFromGallery(context);
               if (pickedImage != null) {
                 Navigator.pushNamed(context, ConfirmStatusScreen.routeName,
@@ -197,12 +181,10 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
           backgroundColor: tabColor,
           child: Icon(
             currentIndex == 0
-                ? Icons.person_sharp
+                ? Icons.comment
                 : currentIndex == 1
-                    ? Icons.comment
-                    : currentIndex == 2
-                        ? Icons.add
-                        : Icons.phone,
+                    ? Icons.add
+                    : Icons.phone,
             color: Colors.white,
           ),
         ),

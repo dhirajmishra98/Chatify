@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/platform_roots/web/widgets/web_archived.dart';
-import 'package:whatsapp_clone/platform_roots/web/widgets/web_contacts_list.dart';
-import 'package:whatsapp_clone/platform_roots/web/widgets/web_profile_appbar.dart';
-import 'package:whatsapp_clone/platform_roots/web/widgets/web_search_bar.dart';
+import 'package:chatify/platform_roots/web/widgets/web_archived.dart';
+import 'package:chatify/platform_roots/web/widgets/web_contacts_list.dart';
+import 'package:chatify/platform_roots/web/widgets/web_profile_appbar.dart';
+import 'package:chatify/platform_roots/web/widgets/web_search_bar.dart';
 
 import '../../../constants/colors.dart';
 import '../widgets/web_chat_appbar.dart';

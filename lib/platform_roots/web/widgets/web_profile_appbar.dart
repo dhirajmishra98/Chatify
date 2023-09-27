@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remixicon/remixicon.dart';
-import 'package:whatsapp_clone/constants/colors.dart';
+import 'package:chatify/constants/colors.dart';
 
 class WebProfileAppBar extends StatelessWidget {
   const WebProfileAppBar({super.key});

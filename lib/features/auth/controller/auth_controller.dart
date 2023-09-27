@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:whatsapp_clone/features/auth/repository/auth_respository.dart';
-import 'package:whatsapp_clone/models/user_model.dart';
+import '../../../models/user_model.dart';
+import '../repository/auth_respository.dart';
 
 final authControllerProvider = Provider((ref) {
   final authRepository = ref.watch(authRepositoryProvider);
@@ -25,9 +25,18 @@ class AuthController {
     required this.ref,
   });
 
+  // Future<UserModel?> getUserData() async {
+  //   UserModel? user = await authRepository.getCurrentUserData();
+  //   return user;
+  // }
+
   Future<UserModel?> getUserData() async {
-    UserModel? user = await authRepository.getCurrentUserData();
-    return user;
+    try {
+      return await authRepository.getCurrentUserData();
+    } catch (e) {
+      debugPrint("Error fetching user data: $e");
+      return null;
+    }
   }
 
   void signInWithPhoneNumber(

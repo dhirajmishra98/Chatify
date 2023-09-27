@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/constants/info.dart';
+import 'package:chatify/constants/info.dart';
 
 class WebContactsList extends StatelessWidget {
   const WebContactsList({super.key});

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/contact.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp_clone/common/widgets/error.dart';
-import 'package:whatsapp_clone/common/widgets/loader.dart';
-import 'package:whatsapp_clone/features/contacts/controller/get_contacts_provider.dart';
+
+import '../../../common/widgets/error.dart';
+import '../../../common/widgets/loader.dart';
+import '../../contacts/controller/get_contacts_provider.dart';
 
 final selectGroupContacts = StateProvider<List<Contact>>((ref) => []);
 
@@ -46,7 +47,7 @@ class _SelectContactsGroupState extends ConsumerState<SelectContactsGroup> {
                       title: Text(
                         contact.displayName,
                         style: const TextStyle(
-                          color: Colors.white,
+                          // color: Colors.white,
                           fontSize: 18,
                         ),
                       ),

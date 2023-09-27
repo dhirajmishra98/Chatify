@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:410721668858:android:5170468f3ecd0d3451c343",
         "android_client_info": {
-          "package_name": "com.example.whatsapp_clone"
+          "package_name": "com.example.chatify"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "410721668858-obadmhojlnnuk1h1ge9g3n6ghic7lsnn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.whatsapp_clone",
+            "package_name": "com.example.chatify",
             "certificate_hash": "adfd203848f9c138cb1bbbe0aee6946579354b10"
           }
         },

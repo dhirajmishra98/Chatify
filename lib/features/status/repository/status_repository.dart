@@ -56,7 +56,7 @@ class StatusRepository {
             .collection('users')
             .where(
               'phoneNumber',
-              isEqualTo: contacts[i].phones[0].normalizedNumber.replaceAll(
+              isEqualTo: contacts[i].phones[0].number.replaceAll(
                     ' ',
                     '',
                   ),
@@ -122,7 +122,7 @@ class StatusRepository {
             .collection('status')
             .where(
               'phoneNumber',
-              isEqualTo: contacts[i].phones[0].normalizedNumber.replaceAll(
+              isEqualTo: contacts[i].phones[0].number.replaceAll(
                     ' ',
                     '',
                   ),

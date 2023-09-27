@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/common/widgets/custom_button.dart';
-import 'package:whatsapp_clone/constants/colors.dart';
-import 'package:whatsapp_clone/features/auth/screens/login_screen.dart';
+import 'package:lottie/lottie.dart';
+
+import '../../../common/widgets/custom_button.dart';
+import '../../../constants/colors.dart';
+import '../../../features/auth/screens/login_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   static const String routeName = '/landing-screen';
@@ -22,20 +24,27 @@ class LandingScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 50),
               const Text(
-                'Welcome to WhatsApp',
+                'Chatify',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 33,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 55,
+                ),
+              ),
+              const Text(
+                'Chirp, don\'t be shy.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: tabColor,
+                  fontSize: 15,
                 ),
               ),
               SizedBox(height: size.height / 9),
-              Image.asset(
-                'assets/images/landing_screen_bg.png',
-                color: tabColor,
-                height: 240,
-                width: 340,
+              Lottie.asset(
+                'assets/animations/landing_logo.json',
+                fit: BoxFit.cover,
+                reverse: true,
               ),
               SizedBox(height: size.height / 8),
               Padding(
@@ -44,6 +53,7 @@ class LandingScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   text: const TextSpan(
                     text: 'Read our ',
+                    style: TextStyle(color: Colors.black),
                     children: [
                       TextSpan(
                         text: 'Privacy Policy',

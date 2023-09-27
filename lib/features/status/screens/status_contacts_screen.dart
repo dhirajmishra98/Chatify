@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp_clone/features/status/screens/status_screen.dart';
 
 import '../../../common/widgets/loader.dart';
 import '../../../constants/colors.dart';
 import '../../../models/status_model.dart';
 import '../controllers/status_controller.dart';
+import './status_screen.dart';
 
 class StatusContactsScreen extends ConsumerWidget {
   const StatusContactsScreen({Key? key}) : super(key: key);
@@ -32,7 +32,7 @@ class StatusContactsScreen extends ConsumerWidget {
                 return Column(
                   children: [
                     const SizedBox(
-                      height: 15,
+                      height: 35,
                     ),
                     InkWell(
                       onTap: () {

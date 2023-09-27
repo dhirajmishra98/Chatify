@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp_clone/common/enums/message_enums.dart';
+
+import '../enums/message_enums.dart';
 
 class MessageReply {
   final String message;

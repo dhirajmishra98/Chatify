@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:whatsapp_clone/common/widgets/loader.dart';
-import 'package:whatsapp_clone/features/chat/controllers/chat_controller.dart';
-import 'package:whatsapp_clone/features/chat/screens/mobile_chat_screen.dart';
-import 'package:whatsapp_clone/models/chat_model.dart';
-import 'package:whatsapp_clone/platform_roots/android/widgets/archived.dart';
+
+import '../../../common/widgets/loader.dart';
+import '../../../models/chat_model.dart';
+import '../../../platform_roots/android/widgets/archived.dart';
+import '../controllers/chat_controller.dart';
+import '../screens/mobile_chat_screen.dart';
 
 class MobContactsList extends ConsumerWidget {
   const MobContactsList({super.key});
@@ -27,18 +28,26 @@ class MobContactsList extends ConsumerWidget {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   var chatContactData = snapshot.data![index];
+                  debugPrint("hello");
                   return Column(
                     children: [
-                      index == 0 ? const ArchivedBox() : Container(),
+                      index == 0
+                          ? ArchivedBox(
+                              isGroup: false,
+                              onTap: () {},
+                            )
+                          : Container(),
                       InkWell(
                         onTap: () {
                           Navigator.pushNamed(
-                              context, MobileChatScreen.routeName, arguments: {
-                            'name': chatContactData.name,
-                            'uid': chatContactData.contactId,
-                            'isGroupChat': false,
-                            'recieverProfilePic': chatContactData.profilePic,
-                          });
+                              context, MobileChatScreen.routeName,
+                              arguments: {
+                                'name': chatContactData.name,
+                                'uid': chatContactData.contactId,
+                                'isGroupChat': false,
+                                'recieverProfilePic':
+                                    chatContactData.profilePic,
+                              });
                         },
                         child: ListTile(
                           leading: chatContactData.profilePic != ""

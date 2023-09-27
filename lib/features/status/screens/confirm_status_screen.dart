@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp_clone/constants/colors.dart';
-import 'package:whatsapp_clone/features/status/controllers/status_controller.dart';
+
+import '../../../constants/colors.dart';
+import '../controllers/status_controller.dart';
 
 class ConfirmStatusScreen extends ConsumerWidget {
   static const String routeName = '/confirm-status-screen';

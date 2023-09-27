@@ -1,4 +1,4 @@
-# whatsapp_clone
+# chatify
 
 A new Flutter project.
 

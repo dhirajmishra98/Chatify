@@ -1,10 +1,10 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp_clone/common/utils/utils.dart';
-import 'package:whatsapp_clone/common/widgets/custom_button.dart';
-import 'package:whatsapp_clone/constants/colors.dart';
-import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
+
+import '../../../common/utils/utils.dart';
+import '../../../common/widgets/custom_button.dart';
+import '../controller/auth_controller.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   static const String routeName = '/login-screen';
@@ -49,10 +49,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return Scaffold(
-      backgroundColor: backgroundColor,
       appBar: AppBar(
         centerTitle: false,
-        backgroundColor: backgroundColor,
         title: const Center(
           child: Text(
             'Enter your phone number',
@@ -74,10 +72,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 textAlign: TextAlign.center,
                 text: const TextSpan(
                   text:
-                      "WhatsApp will send an SMS to verify your\n phone number. ",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+                      "Chatify will send an SMS to verify your\n phone number. ",
+                  style: TextStyle(fontSize: 18, color: Colors.black),
                   children: [
                     TextSpan(
                         text: "What's my number?",
@@ -96,7 +92,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 _country == null
                     ? 'Pick Country'
                     : _country!.displayNameNoCountryCode,
-                style: const TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.black, fontSize: 18),
               ),
             ),
             Row(
@@ -117,8 +113,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ),
             const Spacer(),
             CustomButton(
-              text: 'Next',
+              text: 'Let\'s Verify',
               onPress: sendPhoneNumber,
+            ),
+            const SizedBox(
+              height: 50,
             ),
           ],
         ),

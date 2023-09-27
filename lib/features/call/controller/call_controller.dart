@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
-import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
-import 'package:whatsapp_clone/models/call_model.dart';
-
+import '../../../models/call_model.dart';
+import '../../auth/controller/auth_controller.dart';
 import '../repository/call_repository.dart';
 
 final callControllerProvider = Provider((ref) {

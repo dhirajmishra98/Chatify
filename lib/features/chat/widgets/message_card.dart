@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:swipe_to/swipe_to.dart';
-import 'package:whatsapp_clone/common/enums/message_enums.dart';
-import 'package:whatsapp_clone/features/chat/widgets/message_box.dart';
 
+import '../../../common/enums/message_enums.dart';
 import '../../../constants/colors.dart';
+import 'message_box.dart';
 
 class MessageCard extends StatefulWidget {
   final String isMe;
@@ -121,7 +121,7 @@ class _MessageCardState extends State<MessageCard> {
                                 : Icons.done
                             : null,
                         size: 20,
-                        color: widget.isSeen ? Colors.blue : Colors.white60,
+                        color: widget.isSeen ? Colors.red : Colors.white60,
                       ),
                     ],
                   ),

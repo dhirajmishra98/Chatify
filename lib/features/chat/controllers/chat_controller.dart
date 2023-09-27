@@ -3,15 +3,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp_clone/common/providers/message_reply_provider.dart';
-import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
-
-import 'package:whatsapp_clone/features/chat/repository/chat_repository.dart';
-import 'package:whatsapp_clone/models/chat_model.dart';
-import 'package:whatsapp_clone/models/group_model.dart';
-import 'package:whatsapp_clone/models/message_model.dart';
 
 import '../../../common/enums/message_enums.dart';
+import '../../../common/providers/message_reply_provider.dart';
+import '../../../models/chat_model.dart';
+import '../../../models/group_model.dart';
+import '../../../models/message_model.dart';
+import '../../auth/controller/auth_controller.dart';
+import '../repository/chat_repository.dart';
 
 final chatControllerProvider = Provider((ref) {
   final chatRepository = ref.watch(chatRepositoryProvider);
@@ -99,13 +98,12 @@ class ChatController {
     final messageReply = ref.read(messageReplyProvider);
 
     ref.read(userDataAuthProvider).whenData((value) => chatRepository.sendGif(
-          context: context,
-          gif: gifUrl,
-          recieverUserId: recieverUserId,
-          senderUser: value!,
-          messageReply: messageReply,
-          isGroupChat: isGroupChat
-        ));
+        context: context,
+        gif: gifUrl,
+        recieverUserId: recieverUserId,
+        senderUser: value!,
+        messageReply: messageReply,
+        isGroupChat: isGroupChat));
     ref.read(messageReplyProvider.notifier).update((state) => null);
   }
 

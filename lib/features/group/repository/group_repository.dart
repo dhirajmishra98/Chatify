@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contacts/contact.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
-import 'package:whatsapp_clone/common/repositories/common_firebase_storage_repository.dart';
-import 'package:whatsapp_clone/common/utils/utils.dart';
-import 'package:whatsapp_clone/models/group_model.dart';
+
+import '../../../common/repositories/common_firebase_storage_repository.dart';
+import '../../../common/utils/utils.dart';
+import '../../../models/group_model.dart';
 
 final groupRepositoryProvider = Provider(
   (ref) => GroupRepository(
@@ -43,14 +44,15 @@ class GroupRepository {
             .where(
               'phoneNumber',
               isEqualTo:
-                  selectedContacts[i].phones[0].normalizedNumber.replaceAll(
+                  selectedContacts[i].phones[0].number.replaceAll(
                         ' ',
                         '',
                       ),
             )
             .get();
 
-        if (userDataFirebase.docs.isNotEmpty && !uids.contains(userDataFirebase.docs[0].data()['uid'])) {
+        if (userDataFirebase.docs.isNotEmpty &&
+            !uids.contains(userDataFirebase.docs[0].data()['uid'])) {
           uids.add(userDataFirebase.docs[0].data()['uid']);
         }
       }

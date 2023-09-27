@@ -4,11 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp_clone/features/call/screens/call_screen.dart';
-import 'package:whatsapp_clone/models/call_model.dart';
-import 'package:whatsapp_clone/models/group_model.dart';
 
 import '../../../common/utils/utils.dart';
+import '../../../models/call_model.dart';
+import '../../../models/group_model.dart';
+import '../screens/call_screen.dart';
 
 final callRepositoryProvider = Provider(
   (ref) => CallRepository(
@@ -110,16 +110,9 @@ class CallRepository {
     required BuildContext context,
   }) async {
     try {
-      await firebaseFirestore
-          .collection('calls')
-          .doc(callerId)
-          .delete();
+      await firebaseFirestore.collection('calls').doc(callerId).delete();
 
-      await firebaseFirestore
-          .collection('calls')
-          .doc(recieverId)
-          .delete();
-
+      await firebaseFirestore.collection('calls').doc(recieverId).delete();
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }

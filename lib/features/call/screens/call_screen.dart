@@ -3,7 +3,7 @@
 import 'package:agora_uikit/agora_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp_clone/models/call_model.dart';
+import 'package:chatify/models/call_model.dart';
 
 import '../../../common/utils/agora_config.dart';
 import '../../../common/widgets/loader.dart';

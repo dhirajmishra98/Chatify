@@ -1,6 +1,6 @@
 {
-    "name": "whatsapp_clone",
-    "short_name": "whatsapp_clone",
+    "name": "chatify",
+    "short_name": "chatify",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:whatsapp_clone/common/utils/utils.dart';
-import 'package:whatsapp_clone/constants/urls.dart';
-import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
+import '../../../common/utils/utils.dart';
+import '../../../common/widgets/custom_button.dart';
+import '../../../constants/colors.dart';
+import '../../../constants/urls.dart';
+import '../controller/auth_controller.dart';
 
 class UserInformationScreen extends ConsumerStatefulWidget {
   static const String routeName = '/user-information-screen';
@@ -22,6 +24,7 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
 
   void pickImage() async {
     image = await pickImageFromGallery(context);
+    userProfilePhoto = image;
     setState(() {});
   }
 
@@ -84,23 +87,24 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                   ),
                 ],
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: size.width * 0.85,
-                    padding: const EdgeInsets.all(10),
-                    child: TextField(
-                      controller: nameController,
-                      decoration: const InputDecoration(
-                        hintText: "Enter your name",
-                      ),
-                    ),
+              Container(
+                width: size.width * 0.85,
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: nameController,
+                  enabled: true,
+                  decoration: const InputDecoration(
+                    hintText: "Enter your name",
+                    focusColor: tabColor,
                   ),
-                  IconButton(onPressed: storeUserData, icon: const Icon(Icons.done_outlined))
-                ],
-              )
+                ),
+              ),
+              const Spacer(),
+              CustomButton(
+                text: "Create Profile",
+                onPress: storeUserData,
+              ),
+              SizedBox(height: size.height / 9),
             ],
           ),
         ),

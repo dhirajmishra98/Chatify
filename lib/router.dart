@@ -1,16 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/common/widgets/error.dart';
-import 'package:whatsapp_clone/features/auth/screens/login_screen.dart';
-import 'package:whatsapp_clone/features/auth/screens/otp_screen.dart';
-import 'package:whatsapp_clone/features/auth/screens/user_information_screen.dart';
-import 'package:whatsapp_clone/features/contacts/screens/select_contacts_screen.dart';
-import 'package:whatsapp_clone/features/chat/screens/mobile_chat_screen.dart';
-import 'package:whatsapp_clone/features/group/screens/create_group_screen.dart';
-import 'package:whatsapp_clone/features/status/screens/confirm_status_screen.dart';
-import 'package:whatsapp_clone/features/status/screens/status_screen.dart';
-import 'package:whatsapp_clone/models/status_model.dart';
+import 'package:chatify/common/widgets/error.dart';
+import 'package:chatify/features/auth/screens/login_screen.dart';
+import 'package:chatify/features/auth/screens/otp_screen.dart';
+import 'package:chatify/features/auth/screens/user_information_screen.dart';
+import 'package:chatify/features/contacts/screens/select_contacts_screen.dart';
+import 'package:chatify/features/chat/screens/mobile_chat_screen.dart';
+import 'package:chatify/features/group/screens/create_group_screen.dart';
+import 'package:chatify/features/group/screens/group_screen.dart';
+import 'package:chatify/features/status/screens/confirm_status_screen.dart';
+import 'package:chatify/features/status/screens/status_screen.dart';
+import 'package:chatify/models/status_model.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -60,9 +61,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (context) => StatusScreen(
                 status: status,
               ));
+
     case CreateGroupScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => const CreateGroupScreen(),
+      );
+
+    case GroupScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const GroupScreen(),
       );
 
     default:

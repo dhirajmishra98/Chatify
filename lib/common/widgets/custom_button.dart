@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/constants/colors.dart';
+
+import '../../constants/colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -16,7 +17,7 @@ class CustomButton extends StatelessWidget {
       onPressed: onPress,
       child: Text(
         text,
-        style:const TextStyle(color: blackColor, fontWeight: FontWeight.w600),
+        style: const TextStyle(color: blackColor, fontWeight: FontWeight.w600),
       ),
     );
   }

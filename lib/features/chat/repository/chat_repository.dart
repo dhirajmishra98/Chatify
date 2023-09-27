@@ -6,14 +6,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
-import 'package:whatsapp_clone/common/enums/message_enums.dart';
-import 'package:whatsapp_clone/common/providers/message_reply_provider.dart';
-import 'package:whatsapp_clone/common/repositories/common_firebase_storage_repository.dart';
-import 'package:whatsapp_clone/common/utils/utils.dart';
-import 'package:whatsapp_clone/models/chat_model.dart';
-import 'package:whatsapp_clone/models/group_model.dart';
-import 'package:whatsapp_clone/models/message_model.dart';
-import 'package:whatsapp_clone/models/user_model.dart';
+
+import '../../../common/enums/message_enums.dart';
+import '../../../common/providers/message_reply_provider.dart';
+import '../../../common/repositories/common_firebase_storage_repository.dart';
+import '../../../common/utils/utils.dart';
+import '../../../models/chat_model.dart';
+import '../../../models/group_model.dart';
+import '../../../models/message_model.dart';
+import '../../../models/user_model.dart';
 
 final chatRepositoryProvider = Provider(
   (ref) => ChatRepository(

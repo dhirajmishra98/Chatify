@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp_clone/constants/colors.dart';
-import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
+import 'package:lottie/lottie.dart';
+
+import '../../../constants/colors.dart';
+import '../controller/auth_controller.dart';
 
 class OPTScreen extends ConsumerWidget {
   static const String routeName = '/otp-screen';
@@ -25,9 +27,9 @@ class OPTScreen extends ConsumerWidget {
     final size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: appBarColor,
         centerTitle: true,
-        title: const Text('Verifying your number'),
+        title: const Text('Verifying Your Number'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -37,7 +39,7 @@ class OPTScreen extends ConsumerWidget {
             const SizedBox(height: 15),
             const Center(
               child: Text(
-                'We have sent an SMS with a code',
+                'Chatify has sent an SMS with a code',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
@@ -55,7 +57,6 @@ class OPTScreen extends ConsumerWidget {
                   hintStyle: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
                     letterSpacing: 5,
                   ),
                   contentPadding: EdgeInsets.all(10),
@@ -67,6 +68,11 @@ class OPTScreen extends ConsumerWidget {
                 },
               ),
             ),
+            Lottie.asset(
+              'assets/animations/verify_otp.json',
+              fit: BoxFit.cover,
+              animate: true,
+            )
           ],
         ),
       ),
