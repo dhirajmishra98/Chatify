@@ -1,6 +1,8 @@
 # Chatify
 Chatify is a full-stack one-on-one/group chat application developed using Firebase and Flutter. It offers a wide range of features to enhance your chat experience, including phone number authentication, multimedia sharing, status updates, and much more.
 
+GitHub Repo: https://github.com/dhirajmishra98/Chatify
+
 
 ![License](https://img.shields.io/github/license/dhirajmishra98/Chatify)
 
