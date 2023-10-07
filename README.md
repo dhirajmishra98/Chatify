@@ -1,42 +1,88 @@
-# chatify
+# Chatify
+Chatify is a full-stack one-on-one/group chat application developed using Firebase and Flutter. It offers a wide range of features to enhance your chat experience, including phone number authentication, multimedia sharing, status updates, and much more.
 
-A new Flutter project.
+GitHub Repo: https://github.com/dhirajmishra98/Chatify
 
-## Some Screens - ANDRIOD
-<p float="left">
+
+![License](https://img.shields.io/github/license/dhirajmishra98/Chatify)
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Demo](#demo)
+- [Features](#features)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+## Installation
+
+To get started with Chatify, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/dhirajmishra98/Chatify.git
+   
+2. Navigate to the project directory:
+   ```bash
+   cd Chatify
+   
+3. Install the necessary dependencies:
+   ```bash
+   flutter pub get
   
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/cddf1191-136d-47a8-914e-adb9f4015e63" width="200" /> 
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/38720dd8-5ac8-42d7-83b1-c875011ff3cb" width="200" />
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/29951f09-31b6-403b-a987-4b4db98b93db" width="200" />
+4. Run the app on your preferred device:
+   ```bash
+   flutter run
+  
+## Demo 
+<p float="left">
+  <img src="https://github.com/dhirajmishra98/Chatify/assets/95682044/6e8f8426-a45c-4cf1-9797-791e0d6472eb" width="200" /> 
+    <img src="https://github.com/dhirajmishra98/Chatify/assets/95682044/b52e0cca-9c23-4716-acd0-61108a867af0" width="200" /> 
+   <img src="https://github.com/dhirajmishra98/Chatify/assets/95682044/17ea3b2b-f570-4d8d-b292-d3b60c5d2ab5" width="200" /> 
 </p>
 <p float="left">
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/1b59d31b-6ce3-4ab3-8fdc-b6591cd6d7a8" width="200" /> 
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/d9ef74ab-ec0c-4f18-8423-a60dd14caf70" width="200" />
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/e2247815-af9b-4c5b-ae62-8b98f3a2dec5" width="200" />
-</p>
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/cfe02f32-4239-4e06-9de6-099e7d124ff5" width="200" />
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/6f7e7e57-91b3-4f6b-9bf2-6d1408d05bb6" width="200" />
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/cd91a95e-d5cd-47bd-9135-45c0c3cfbbf9" width="200" /> 
-<p float="left">
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/4ce50748-295b-4f14-aa68-cbd0dfb59c24" width="200" />
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/2817c27f-acf7-49c1-b86d-43c64f561d76" width="200" /> 
-  <img src="https://github.com/dhirajmishra98/WhatsApp-clone/assets/95682044/4a8e77e8-cb00-4693-b013-7fd09ff62271" width="200" />
+  <img src="https://github.com/dhirajmishra98/Chatify/assets/95682044/2861176e-1b24-4168-afc2-c4bbc7035ad1" width="600" />
 </p>
 
-<br>
-<br>
+## Features
+<ul>
 
-## Screen With Dummy Data - WEB
-![image](https://github.com/dhirajmishra98/Chatify/assets/95682044/2861176e-1b24-4168-afc2-c4bbc7035ad1)
+  <li><b>Phone Number Authentication</b>: Securely authenticate with your phone number.
+  <li><b>One-on-One and Group Chat</b>: Chat with your contacts individually or create group chats.</li>
+  <li><b>Multimedia Messaging</b>: Share text, images, GIFs, videos, and audio messages. Enjoy image and video caching for efficient storage usage.</li>
+  <li><b>Emoji Sharing</b>: Express yourself with a wide range of emojis.</li>
+  <li><b>Status Updates</b>: Set and view status updates that are visible to your contacts only.</li>
+  <li><b>Video Calling</b>: Make one-on-one and group video calls within the app.</li>
+  <li><b>Online/Offline Status</b>: See the online/offline status of your contacts.</li>
+  <li><b>Message Seen Feature</b>: Know when your messages have been seen by recipients.
+</li>
+  <li><b>Automatic Scrolling</b>: Stay up-to-date with automatic scrolling on new messages.</li>
+  <li><b>Message Reply</b>: Easily reply to specific messages.</li>
+</ul>
 
+## Usage
+<ol>
+  <li>Open the Chatify app on your device.</li>
+  <li>Authenticate using your phone number.</li>
+  <li>Start chatting with your contacts or create group chats.</li>
+  <li>Share text, images, videos, audio, and more.</li>
+  <li>Enjoy the rich chat experience with features like emoji sharing, status updates, and video calling.</li>
+</ol>
 
-This project is a starting point for a Flutter application.
+## Contributing
+We welcome contributions from the community! If you'd like to contribute to Chatify, please follow these steps:
+<ol>
+  <li>Fork the repository.</li>
+  <li>Create a new branch for your feature or bug fix.</li>
+  <li>Make your changes and test them thoroughly.</li>
+  <li>Create a pull request describing your changes.</li>
+  <li>Our team will review and merge your contributions.</li>
+</ol>
 
-A few resources to get you started if this is your first Flutter project:
+## License
+Chatify is open-source and available under the MIT License. See the LICENSE file for details.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Acknowledgments
+Thanks to Rivaan Ranawat, Flutter, and Firebase communities for their valuable resources and support.
