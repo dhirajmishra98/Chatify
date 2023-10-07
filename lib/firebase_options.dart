@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -46,8 +47,8 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC2fqFXEuaDsfH3HK9wFJ82BWdz2Mpc2hI',
+  static  FirebaseOptions web = FirebaseOptions(
+    apiKey: dotenv.env["firebase_web_api_key"]!,
     appId: '1:410721668858:web:00978a1377957faa51c343',
     messagingSenderId: '410721668858',
     projectId: 'whatsapp-clone-c01d7',
@@ -55,16 +56,16 @@ class DefaultFirebaseOptions {
     storageBucket: 'whatsapp-clone-c01d7.appspot.com',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCzQk-5ggzH0WMSkz1U-rtYZTyQ316r-4A',
+  static  FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env['firebase_android_api_key']!,
     appId: '1:410721668858:android:5170468f3ecd0d3451c343',
     messagingSenderId: '410721668858',
     projectId: 'whatsapp-clone-c01d7',
     storageBucket: 'whatsapp-clone-c01d7.appspot.com',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDKqSNTk8R9n-5K6j7daFUSy4Tvol2ZYB0',
+  static  FirebaseOptions ios = FirebaseOptions(
+    apiKey: dotenv.env['firebase_ios_api_key']!,
     appId: '1:410721668858:ios:8b4b59bf00c2564651c343',
     messagingSenderId: '410721668858',
     projectId: 'whatsapp-clone-c01d7',
