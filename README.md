@@ -4,7 +4,7 @@ Chatify is a full-stack one-on-one/group chat application developed using Fireba
 GitHub Repo: https://github.com/dhirajmishra98/Chatify
 
 
-![License](https://img.shields.io/github/license/dhirajmishra98/Chatify)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of Contents
 
