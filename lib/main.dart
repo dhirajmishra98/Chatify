@@ -11,7 +11,7 @@ import 'package:chatify/platform_roots/android/screens/landing_screen.dart';
 import 'package:chatify/firebase_options.dart';
 import 'package:chatify/platform_roots/android/screens/mobile_screen_layout.dart';
 
-Future main() async {
+Future<void> main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

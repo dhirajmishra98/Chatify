@@ -15,6 +15,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
+
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
@@ -47,7 +48,7 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static  FirebaseOptions web = FirebaseOptions(
+  static FirebaseOptions web = FirebaseOptions(
     apiKey: dotenv.env["firebase_web_api_key"]!,
     appId: '1:410721668858:web:00978a1377957faa51c343',
     messagingSenderId: '410721668858',
@@ -56,7 +57,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'whatsapp-clone-c01d7.appspot.com',
   );
 
-  static  FirebaseOptions android = FirebaseOptions(
+  static FirebaseOptions android = FirebaseOptions(
     apiKey: dotenv.env['firebase_android_api_key']!,
     appId: '1:410721668858:android:5170468f3ecd0d3451c343',
     messagingSenderId: '410721668858',
@@ -64,13 +65,14 @@ class DefaultFirebaseOptions {
     storageBucket: 'whatsapp-clone-c01d7.appspot.com',
   );
 
-  static  FirebaseOptions ios = FirebaseOptions(
+  static FirebaseOptions ios = FirebaseOptions(
     apiKey: dotenv.env['firebase_ios_api_key']!,
     appId: '1:410721668858:ios:8b4b59bf00c2564651c343',
     messagingSenderId: '410721668858',
     projectId: 'whatsapp-clone-c01d7',
     storageBucket: 'whatsapp-clone-c01d7.appspot.com',
-    iosClientId: '410721668858-emqdr71jkthm5otfmcsq37743aln01i8.apps.googleusercontent.com',
+    iosClientId:
+        '410721668858-emqdr71jkthm5otfmcsq37743aln01i8.apps.googleusercontent.com',
     iosBundleId: 'com.example.whatsappClone',
   );
 }
