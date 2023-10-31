@@ -35,8 +35,11 @@ To get started with Chatify, follow these steps:
 4. Run the app on your preferred device:
    ```bash
    flutter run
+
   
 ## Demo 
+![chatify](https://github.com/dhirajmishra98/Chatify/assets/95682044/cfbf82a6-ea0f-4ed5-9402-35c3aba4dc2d)
+
 <p float="left">
   <img src="https://github.com/dhirajmishra98/Chatify/assets/95682044/6e8f8426-a45c-4cf1-9797-791e0d6472eb" width="200" /> 
   <img src="https://github.com/dhirajmishra98/Chatify/assets/95682044/76751e4b-e005-4470-a31c-f7931343c0a2" width="200" />
